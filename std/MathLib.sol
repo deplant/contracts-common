@@ -26,5 +26,5 @@ abstract contract MathLib {
 							10**decimals_
 		);
     }	
-
+	
 }

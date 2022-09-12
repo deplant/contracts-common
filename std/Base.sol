@@ -30,7 +30,7 @@ abstract contract Base is Errors, Flags {
 	
 	// Reserving constant amount of gas, so change return will pay correct sums
     function $reserve(uint128 gasAmount) internal inline pure {
-		tvm.rawReserve($toValue(gasAmount), 0);
+		tvm.rawReserve($toValue(gasAmount), RSRV_EXACT);
 	}	
 	
 	// Sending all change to address
