@@ -63,27 +63,32 @@ abstract contract Base {
 		_;
 	}
 	
+	///@title Reserve Gas using gasToValue of GAS_FLOOR constant amount
 	modifier reserveGas {
 		_reserve(GAS_FLOOR);
 		_;
 	}
-	
+
+	///@title Reserve Gas using gasToValue of provided Gas amount
 	modifier reserveGasExactly(uint128 gasAmount) {
 		_reserve(gasAmount);
 		_;
 	}	
-	
+
+	///@title Checks message value against gasToValue of provided Gas amount
 	modifier checkValue(uint128 gasAmount) {
 		require(msg.value >= _toValue(gasAmount), NOT_ENOUGH_VALUE);
 		_;
 	}
-    
-	modifier returnChange {    
+
+	///@title Returns all balance of contract as a change (except reserved value)
+	modifier returnAllUnreserved {    
 		_;
 		_sendChange(msg.sender);
 	}
-    
-	modifier returnChangeTo(address to) {
+
+    	///@title Sends all balance of contract to provided address as a change (except reserved value)
+	modifier returnAllUnreservedTo(address to) {
 		_;
 		_sendChange(to);
 	}	
