@@ -6,28 +6,30 @@ abstract contract MathLib {
 	// Price Math Support Functions
 	// ****************************************************************	
 
-	///@title Reversed price for assets price pair
+	///@dev Reversed price for assets price pair
 	///@notice EVER->USD becomes USD->EVER
     function $reversePrice(uint128 forwardPrice_, uint8 decimals_) internal inline pure returns (uint128)
     {
-		return math.muldivc(
-							10**decimals_,
-							10**decimals_, 
-							forwardPrice_
-		);
+		require(decimals_ <= 18, 600, "MATH: More than 18 decimals isn't supported");
+		uint64 ten = 10;
+		uint64 decimalsUint = ten**decimals_;
+		return math.muldivc(decimalsUint,
+							decimalsUint, 
+							forwardPrice_);
     }		
 
-	///@title Returns amount of exchanged asset
+	///@dev Returns amount of exchanged asset
     function $exchange(uint128 amount_, uint128 price_, uint8 decimals_) internal inline pure returns (uint128)
     {
-		return math.muldiv(
-							amount_,
+		require(decimals_ <= 18, 600, "MATH: More than 18 decimals isn't supported");
+		uint64 ten = 10;
+		uint64 decimalsUint = ten**decimals_;
+		return math.muldiv( amount_,
 							price_, 
-							10**decimals_
-		);
+							decimalsUint);
     }	
 	
-	function $swap(int128[] array_, uint128 indexA_, uint128 indexB_) internal inline pure {
+	function $swap(uint128[] array_, uint indexA_, uint indexB_) internal inline pure {
 		(array_[indexA_], array_[indexB_]) = (array_[indexB_], array_[indexA_]);
 	}
 	
@@ -37,11 +39,11 @@ abstract contract MathLib {
 				(x & y & 1);
 	}		
 	
-	function _sort(int256[] array, uint256 begin, uint256 end) internal pure {
+	function _sort(uint128[] array, uint begin, uint end) internal pure {
 		if (begin < end) {
-			uint256 j = begin;
-			int256 pivot = array[j];
-			for (uint256 i = begin + 1; i < end; ++i) {
+			uint j = begin;
+			uint128 pivot = array[j];
+			for (uint i = begin + 1; i < end; ++i) {
 				if (array[i] < pivot) {
 					$swap(array, i, ++j);
 				}
