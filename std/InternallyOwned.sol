@@ -4,7 +4,7 @@ import "./Errors.sol";
 
 abstract contract InternallyOwned is Errors {
 
-    function $intOwner() internal inline view returns (address owner);
+    function $intOwner() virtual internal inline view returns (address owner);
 
 	// ****************************************************************	
 	// Modifiers
