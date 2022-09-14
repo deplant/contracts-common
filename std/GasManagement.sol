@@ -1,0 +1,71 @@
+pragma ever-solidity ^0.64;
+
+import "./Errors.sol";
+import "./Flags.sol";
+
+abstract contract GasManagement is Errors, Flags {
+
+	// ****************************************************************	
+	// Contants
+	// ****************************************************************		
+	uint128 constant GAS_FLOOR = 25_000; // // 0.025 EVERs currently. IMPORTANT! this is Gas amount, not EVER amount!!! Use $toValue() to get EVERs
+	
+	// ****************************************************************	
+	// Abstract
+	// ****************************************************************		
+    function $gasFloor() virtual internal inline view returns (uint128 gasAmount);	
+	
+	// ****************************************************************	
+	// Inlined Macros
+	// ****************************************************************		
+
+	// Calculating real amount for paying needed gas
+	function $toValue(uint128 gasAmount) internal inline pure returns (uint128) {
+		return gasToValue(gasAmount, address(this).wid);
+	}
+	
+	// Reserving constant amount of gas, so change return will pay correct sums
+    function $reserve(uint128 gasAmount) internal inline pure {
+		tvm.rawReserve($toValue(gasAmount), RSRV_EXACT);
+	}	
+	
+	// Sending all change to address
+	// $gasFloor() should be reserved on balance before doing this
+	function $sendChange(address to) internal inline pure {
+		to.transfer(0, true, ALL_BALANCE_GAS);
+	}
+    
+	// ****************************************************************	
+	// Modifiers
+	// ****************************************************************	
+	
+	///@dev Reserve Gas using gasToValue of $gasFloor() constant amount
+	modifier reserveGas {
+		$reserve($gasFloor());
+		_;
+	}
+
+	///@dev Reserve Gas using gasToValue of provided Gas amount
+	modifier reserveGasExactly(uint128 gasAmount) {
+		$reserve(gasAmount);
+		_;
+	}	
+
+	///@dev Checks message value against gasToValue of provided Gas amount
+	modifier checkValue(uint128 gasAmount) {
+		require(msg.value >= $toValue(gasAmount), NOT_ENOUGH_VALUE);
+		_;
+	}
+
+	///@dev Returns all balance of contract as a change (except reserved value)
+	modifier returnAllUnreserved {    
+		_;
+		$sendChange(msg.sender);
+	}
+
+    	///@dev Sends all balance of contract to provided address as a change (except reserved value)
+	modifier returnAllUnreservedTo(address to) {
+		_;
+		$sendChange(to);
+	}	
+}
