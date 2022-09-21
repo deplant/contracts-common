@@ -10,12 +10,12 @@ abstract contract Errors {
 	* 40 - External inbound message has an invalid signature. See tvm.pubkey() and msg.pubkey().
 	* 50 - Array index or index of <mapping>.at() is out of range.
 	* 51 - Contract's constructor has already been called.
-	* 52 - Replay protection exception. See timestamp in pragma AbiHeader.
+	* 52 - Replay protection exception. 
 	* 53 - See <address>.unpack().
 	* 54 - <array>.pop call for an empty array.
 	* 55 - See tvm.insertPubkey().
-	* 57 - External inbound message is expired. See expire in pragma AbiHeader.
-	* 58 - External inbound message has no signature but has public key. See pubkey in pragma AbiHeader.
+	* 57 - External inbound message is expired. 
+	* 58 - External inbound message has no signature but has public key. 
 	* 60 - Inbound message has wrong function id. In the contract there are no functions with such function id and there is no fallback function that could handle the message. See fallback.
 	* 61 - Deploying StateInit has no public key in data field.
 	* 62 - Reserved for internal usage.
