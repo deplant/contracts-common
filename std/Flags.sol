@@ -20,17 +20,20 @@ abstract contract Flags {
 	// RAWRESERVE Flags
 	// ****************************************************************	
 	
+	// EXACT - exact specified value
+	// POSSIBLE = min(value, remaining_balance), so it's possible value
+	// PREV - original (pre-execution) balance
 	uint8 constant RSRV_EXACT = 0; // 0 -> reserve = value nanotons.
 	uint8 constant RSRV_ALL_EXCEPT_EXACT = 1; // 1 -> reserve = remaining_balance - value nanotons.
 	uint8 constant RSRV_POSSIBLE = 2; // 2 -> reserve = min(value, remaining_balance) nanotons.
-	uint8 constant RSRV_3 = 3; // 3 = 2 + 1 -> reserve = remaining_balance - min(value, remaining_balance) nanotons.
-	uint8 constant RSRV_4 = 4; // 4 -> reserve = original_balance + value nanotons.
-	uint8 constant RSRV_5 = 5; // 5 = 4 + 1 -> reserve = remaining_balance - (original_balance + value) nanotons.
-	uint8 constant RSRV_6 = 6; // 6 = 4 + 2 -> reserve = min(original_balance + value, remaining_balance) = remaining_balance nanotons.
-	uint8 constant RSRV_7 = 7; // 7 = 4 + 2 + 1 -> reserve = remaining_balance - min(original_balance + value, remaining_balance) nanotons.
-	uint8 constant RSRV_12 = 12; // 12 = 8 + 4 -> reserve = original_balance - value nanotons.
-	uint8 constant RSRV_13 = 13; // 13 = 8 + 4 + 1 -> reserve = remaining_balance - (original_balance - value) nanotons.
-	uint8 constant RSRV_14 = 14; // 14 = 8 + 4 + 2 -> reserve = min(original_balance - value, remaining_balance) nanotons.
-	uint8 constant RSRV_15 = 15; // 15 = 8 + 4 + 2 + 1 -> reserve = remaining_balance - min(original_balance - value, remaining_balance) nanotons.
+	uint8 constant RSRV_ALL_EXCEPT_POSSIBLE = 3; // 3 = 2 + 1 -> reserve = remaining_balance - min(value, remaining_balance) nanotons.
+	uint8 constant RSRV_PREV_BALANCE_AND_EXACT = 4; // 4 -> reserve = original_balance + value nanotons.
+	uint8 constant RSRV_ALL_EXCEPT_PREV_AND_EXACT = 5; // 5 = 4 + 1 -> reserve = remaining_balance - (original_balance + value) nanotons.
+	uint8 constant RSRV_PREV_BALANCE_AND_VALUE_IF_POSSIBLE = 6; // 6 = 4 + 2 -> reserve = min(original_balance + value, remaining_balance) = remaining_balance nanotons.
+	uint8 constant RSRV_ALL_EXCEPT_PREV_BALANCE_AND_EXACT_IF_POSSIBLE = 7; // 7 = 4 + 2 + 1 -> reserve = remaining_balance - min(original_balance + value, remaining_balance) nanotons.
+	uint8 constant RSRV_PREV_BALANCE_EXCEPT_EXACT = 12; // 12 = 8 + 4 -> reserve = original_balance - value nanotons.
+	uint8 constant RSRV_ALL_EXCEPT_PREV_BALANCE_EXCEPT_EXACT = 13; // 13 = 8 + 4 + 1 -> reserve = remaining_balance - (original_balance - value) nanotons.
+	uint8 constant RSRV_PREV_BALANCE_AND_EXACT_IF_POSSIBLE = 14; // 14 = 8 + 4 + 2 -> reserve = min(original_balance - value, remaining_balance) nanotons.
+	uint8 constant RSRV_ALL_EXCEPT_PREV_BALANCE_EXCEPT_EXACT_IF_POSSIBLE = 15; // 15 = 8 + 4 + 2 + 1 -> reserve = remaining_balance - min(original_balance - value, remaining_balance) nanotons.	
 	
 }

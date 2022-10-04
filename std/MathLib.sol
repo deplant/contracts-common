@@ -63,4 +63,28 @@ abstract contract MathLib {
 				sortedArray_[length_/2];
 	}
 	
+	function _mode(uint128[] array) internal pure returns (uint128) {
+		uint128 modeValue; 
+		uint[] count; 
+		uint index; 
+		uint maxIndex = 0;
+		//uint zero=0;
+
+		for (uint i = 0; i < array.length; i += 1) {
+			index = array[i];
+			count[index] = (count[index]) + 1;
+			if (count[index] > count[maxIndex]) {
+				maxIndex = index;
+			}
+		}
+
+		for (uint i =0;i < count.length; i++)
+			if (count[i] == maxIndex) {
+					modeValue=count[i];
+					break;
+				}
+
+		return modeValue;
+	}
+	
 }
