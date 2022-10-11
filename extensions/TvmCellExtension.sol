@@ -12,4 +12,9 @@ library TvmCellExtension {
 		return (tvm.hash(cell_),cell_.depth());
 	}	
 	
+	function isEmpty(TvmCell cell_) internal inline returns (bool) {
+		TvmBuilder builder;
+		TvmCell emptyCell = builder.toCell();
+		return (cell_ == emptyCell);
+	}	
 }
