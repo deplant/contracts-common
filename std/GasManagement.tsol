@@ -1,7 +1,7 @@
 pragma ever-solidity ^0.64;
 
-import "./Errors.sol";
-import "./Flags.sol";
+import "./Errors.tsol";
+import "./Flags.tsol";
 
 abstract contract GasManagement is Errors, Flags {
 

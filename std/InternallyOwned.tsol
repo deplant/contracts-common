@@ -1,6 +1,6 @@
 pragma ever-solidity ^0.64;
 
-import "./Errors.sol";
+import "./Errors.tsol";
 
 abstract contract InternallyOwned is Errors {
 
