@@ -10,7 +10,7 @@ abstract contract InternallyOwned is Errors {
 	// Modifiers
 	// ****************************************************************	
 	modifier onlyIntOwner {
-		require(msg.sender.value == $intOwner().value, NOT_MY_OWNER);
+		require(msg.sender.value != 0 && msg.sender == $intOwner(), NOT_MY_OWNER);
 		_;
 	}
 	
