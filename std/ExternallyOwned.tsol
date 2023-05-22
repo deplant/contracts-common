@@ -4,16 +4,23 @@ import "./Errors.tsol";
 
 abstract contract ExternallyOwned is Errors {
 
+	// ****************************************************************
+	// Inline
+	// ****************************************************************
+	function $requireExtOwnerSign() internal inline view {
+		require(msg.pubkey() == tvm.pubkey(), NOT_MY_OWNER);
+	}
+
 	// ****************************************************************	
 	// Modifiers
 	// ****************************************************************	
 	modifier onlyExtOwner {
-		require(msg.pubkey() == tvm.pubkey(), NOT_MY_OWNER);
+		$requireExtOwnerSign;
 		_;
 	}
 
 	modifier checkExtOwnerAndAccept {
-		require(msg.pubkey() == tvm.pubkey(), NOT_MY_OWNER);
+		$requireExtOwnerSign;
 		tvm.accept();
 		_;
 	}
