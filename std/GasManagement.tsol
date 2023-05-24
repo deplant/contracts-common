@@ -32,7 +32,7 @@ abstract contract GasManagement is Errors, Flags {
 	// Sending all change to address
 	// $gasFloor() should be reserved on balance before doing this
 	function $sendChange(address to) internal inline pure {
-		to.transfer(0, true, ALL_BALANCE_GAS);
+		to.transfer(0, true, ALL_UNRESERVED);
 	}
     
 	// ****************************************************************	
