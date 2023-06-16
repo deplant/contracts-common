@@ -8,7 +8,7 @@ abstract contract GasManagement is Errors, Flags {
 	// ****************************************************************	
 	// Contants
 	// ****************************************************************		
-	uint128 constant DEFAULT_GAS_FLOOR = 25_000; // // 0.025 EVERs currently. IMPORTANT! this is Gas amount, not EVER amount!!! Use $toValue() to get EVERs
+	uint128 constant DEFAULT_GAS_FLOOR = 2_500_000; // // 2.500 EVERs currently. IMPORTANT! this is Gas amount, not EVER amount!!! Use $toValue() to get EVERs
 	
 	// ****************************************************************	
 	// Abstract
