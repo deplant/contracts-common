@@ -41,9 +41,9 @@ abstract contract Errors {
 	// ****************************************************************		
 
 	// Security
-	uint16 constant WRONG_CONSTRUCTOR_VALUES = 200;	
-	uint16 constant NOT_MY_OWNER = 201;		
+	uint16 constant WRONG_CONSTRUCTOR_VALUES = 400;
+	uint16 constant NOT_MY_OWNER = 401;
 	// Gas
-	uint16 constant NOT_ENOUGH_VALUE = 666;	
+	uint16 constant NOT_ENOUGH_VALUE = 402;
 	
 }

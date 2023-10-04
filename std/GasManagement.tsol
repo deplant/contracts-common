@@ -26,13 +26,13 @@ abstract contract GasManagement is Errors, Flags {
 
     // Reserving constant amount of gas, so change return will pay correct sums
     function $reserve(uint128 gasAmount) internal inline pure {
-        tvm.rawReserve($toValue(gasAmount), RSRV_EXACT);
+        tvm.rawReserve($toValue(gasAmount), RSRV_POSSIBLE);
     }
 
     // Sending all change to address
     // $gasFloor() should be reserved on balance before doing this
     function $sendChange(address to) internal inline pure {
-        to.transfer(0, true, ALL_UNRESERVED);
+        to.transfer(0, true, ALL_UNRESERVED + IGNORE_ERRORS);
     }
 
     // ****************************************************************
